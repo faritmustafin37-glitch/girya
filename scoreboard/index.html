@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071019" />
+    <title>KETTLEBOARD — табло гиревого спорта</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="KETTLEBOARD">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M17 17a7 7 0 0 1 14 0v3h-5v-3a2 2 0 1 0-4 0v3h-5v-3Z"/><path d="M13 24c0-3 2-5 5-5h12c3 0 5 2 5 5l3 14c.5 3-1.5 5-4.5 5h-19C11.5 43 9.5 41 10 38l3-14Z"/></svg>
+          </div>
+          <div>
+            <div class="brand-name">KETTLE<span>BOARD</span></div>
+            <div class="brand-sub">Competition system</div>
+          </div>
+        </div>
+
+        <div class="meet-title">
+          <span class="live-dot"></span>
+          <div>
+            <strong id="meetName">Кубок Поволжья</strong>
+            <span>Соревновательный поток • Помост 04</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="icon-button" id="soundButton" title="Звук" aria-label="Включить или выключить звук">
+            <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4.5 4a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg>
+          </button>
+          <button class="icon-button" id="fullscreenButton" title="На весь экран" aria-label="Полноэкранный режим">
+            <svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+          </button>
+          <button class="outline-button" id="settingsButton">
+            <svg viewBox="0 0 24 24"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/><path d="m19.4 15 .1.1 1 1.8-2 2-1.8-1-.1-.1a8 8 0 0 1-2.1.9V21h-5v-2.3a8 8 0 0 1-2.1-.9l-.1.1-1.8 1-2-2 1-1.8.1-.1a8 8 0 0 1-.9-2.1H2.5v-2h2.2a8 8 0 0 1 .9-2.1l-.1-.1-1-1.8 2-2 1.8 1 .1.1a8 8 0 0 1 2.1-.9V3h5v2.3a8 8 0 0 1 2.1.9l.1-.1 1.8-1 2 2-1 1.8-.1.1a8 8 0 0 1 .9 2.1h2.2v2h-2.2a8 8 0 0 1-.9 2.1Z"/></svg>
+            Настройки
+          </button>
+        </div>
+      </header>
+
+      <section class="discipline-bar" aria-label="Выбор упражнения">
+        <button class="discipline active" data-discipline="Рывок"><span>01</span> Рывок</button>
+        <button class="discipline" data-discipline="Толчок"><span>02</span> Толчок</button>
+        <button class="discipline" data-discipline="Длинный цикл"><span>03</span> Длинный цикл</button>
+        <div class="weight-selector">
+          <span>Вес гири</span>
+          <button class="weight active" data-weight="16">16</button>
+          <button class="weight" data-weight="24">24</button>
+          <button class="weight" data-weight="32">32</button>
+          <strong>кг</strong>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <article class="athlete-card panel">
+          <div class="section-label">ATHLETE / СПОРТСМЕН</div>
+          <div class="athlete-head">
+            <div class="avatar">FM</div>
+            <div>
+              <h1 id="athleteName">Фарит<br />Мустафин</h1>
+              <div class="country"><span class="flag"></span> RUS • Татарстан</div>
+            </div>
+          </div>
+
+          <div class="athlete-stats">
+            <div><span>Вес тела</span><strong>78.4 <small>кг</small></strong></div>
+            <div><span>Категория</span><strong>М85</strong></div>
+            <div><span>Разряд</span><strong>КМС</strong></div>
+            <div><span>Старт №</span><strong>047</strong></div>
+          </div>
+
+          <div class="target-box">
+            <div class="target-copy"><span>Цель подхода</span><strong id="targetValue">100</strong></div>
+            <div class="target-progress"><i id="targetProgress"></i></div>
+          </div>
+
+          <div class="judge-status">
+            <span class="status-icon">✓</span>
+            <div><strong>Система готова</strong><small>Табло и камера подключены</small></div>
+          </div>
+        </article>
+
+        <article class="score-card panel">
+          <div class="score-topline">
+            <div>
+              <span class="section-label">VALID REPS / ЗАСЧИТАНО</span>
+              <div class="mode-badge" id="modeBadge"><span></span> Ручной режим</div>
+            </div>
+            <div class="pace"><span>Темп</span><strong id="paceValue">0.0</strong><small>повт/мин</small></div>
+          </div>
+
+          <div class="score-wrap">
+            <div class="score-number" id="scoreNumber" aria-live="polite">000</div>
+            <div class="score-caption"><span id="disciplineLabel">Рывок</span> • <span id="weightLabel">16 кг</span></div>
+          </div>
+
+          <div class="manual-controls">
+            <button class="count-button minus" id="minusButton" aria-label="Убавить повторение"><span>−</span><small>Отменить</small></button>
+            <button class="count-button plus" id="plusButton" aria-label="Добавить повторение"><span>+</span><small>Засчитать</small></button>
+          </div>
+          <div class="key-hint"><kbd>Space</kbd> засчитать <span></span> <kbd>←</kbd> отменить</div>
+        </article>
+
+        <article class="camera-card panel">
+          <div class="camera-header">
+            <div>
+              <span class="section-label">CAMERA TRACKING / КАМЕРА</span>
+              <strong id="cameraTitle">Камера не включена</strong>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="autoToggle" />
+              <span></span>
+              AUTO
+            </label>
+          </div>
+
+          <div class="camera-viewport" id="cameraViewport">
+            <video id="cameraVideo" muted playsinline></video>
+            <canvas id="trackingCanvas"></canvas>
+            <div class="camera-placeholder" id="cameraPlaceholder">
+              <div class="camera-orbit"><span></span><svg viewBox="0 0 24 24"><path d="M4 7h3l1.5-2h7L17 7h3v12H4V7Z"/><circle cx="12" cy="13" r="4"/></svg></div>
+              <strong>Автотрекинг повторов</strong>
+              <span>Камера определит цикл движения и<br />добавит завершённое повторение</span>
+              <button id="enableCameraButton"><svg viewBox="0 0 24 24"><path d="M4 7h3l1.5-2h7L17 7h3v12H4V7Z"/><circle cx="12" cy="13" r="4"/></svg> Включить камеру</button>
+            </div>
+            <div class="tracking-overlay" id="trackingOverlay">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="tracking-pill"><span></span> TRACKING</div>
+              <div class="motion-meter"><i id="motionBar"></i></div>
+            </div>
+          </div>
+
+          <div class="camera-footer">
+            <div class="confidence"><span>Уверенность</span><strong id="confidenceValue">—</strong></div>
+            <button class="calibrate-button" id="calibrateButton" disabled>Калибровка</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="bottom-strip panel">
+        <div class="timer-block">
+          <span class="section-label">TIME / ВРЕМЯ ПОДХОДА</span>
+          <div class="timer" id="timerDisplay">10:00<span>.0</span></div>
+        </div>
+        <div class="timer-progress"><i id="timerProgress"></i><span id="elapsedLabel">00:00 прошло</span><span id="remainingLabel">10:00 осталось</span></div>
+        <div class="timer-actions">
+          <button class="start-button" id="startButton"><svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"/></svg><span>Старт</span></button>
+          <button class="reset-button" id="resetButton" title="Сбросить"><svg viewBox="0 0 24 24"><path d="M20 7v5h-5M18.5 16a8 8 0 1 1 0-8l1.5 4"/></svg></button>
+        </div>
+        <div class="rep-log">
+          <span class="section-label">LAST REPS / ПОСЛЕДНИЕ</span>
+          <div id="repLog"><em>Повторений пока нет</em></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span><i></i> SYSTEM ONLINE</span>
+        <span id="controllerStatus">USB BUTTON: ОЖИДАНИЕ</span>
+        <span>KETTLEBOARD v1.0</span>
+        <span id="clock">—</span>
+      </footer>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form method="dialog">
+        <div class="dialog-head"><div><span class="section-label">SESSION SETUP</span><h2>Настройки подхода</h2></div><button value="cancel" aria-label="Закрыть">×</button></div>
+        <label>Спортсмен <input id="athleteInput" value="Фарит Мустафин" /></label>
+        <div class="field-row">
+          <label>Время, мин <input id="durationInput" type="number" min="1" max="60" value="10" /></label>
+          <label>Цель, повт. <input id="targetInput" type="number" min="1" max="999" value="100" /></label>
+        </div>
+        <label>Порог движения <input id="thresholdInput" type="range" min="4" max="35" value="14" /><output id="thresholdOutput">14%</output></label>
+        <div class="dialog-note">Автотрекер оценивает изменение кадра. Для лучшего результата установите камеру сбоку и пройдите калибровку.
+        </div>
+        <button class="save-button" id="saveSettingsButton" value="default">Сохранить настройки</button>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
