@@ -5,7 +5,7 @@
  * чтобы приложение никогда не считало себя готовым к офлайну наполовину.
  * Все пути считаются от папки приложения, поэтому оно работает и в корне сайта, и в подпапке.
  */
-const VERSION = '2026-11-25';
+const VERSION = '2026-11-25-2';
 const CACHE = `girya-offline-${VERSION}`;
 const SCOPE = new URL(self.registration.scope);
 const at = path => new URL(String(path).replace(/^\//, ''), SCOPE).href;
